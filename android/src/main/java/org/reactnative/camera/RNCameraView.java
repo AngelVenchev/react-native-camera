@@ -267,6 +267,7 @@ public class RNCameraView extends CameraView implements LifecycleEventListener, 
       boolean recordAudio = !options.hasKey("mute");
 
       if (super.record(path, maxDuration * 1000, maxFileSize, recordAudio, profile)) {
+        RNCameraViewHelper.emitRecordingStartedEvent(this, path);
         mVideoRecordedPromise = promise;
       } else {
         promise.reject("E_RECORDING_FAILED", "Starting video recording failed. Another recording might be in progress.");

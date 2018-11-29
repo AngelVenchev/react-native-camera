@@ -358,6 +358,12 @@ export default class Camera extends React.Component<PropsType, StateType> {
     }
   };
 
+  _onRecordingStarted = ({ nativeEvent }: EventCallbackArgumentsType) => {
+    if (this.props.onRecordingStarted) {
+      this.props.onRecordingStarted(nativeEvent);
+    } 
+  }
+
   _setReference = (ref: ?Object) => {
     if (ref) {
       this._cameraRef = ref;
@@ -421,6 +427,7 @@ export default class Camera extends React.Component<PropsType, StateType> {
           onFacesDetected={this._onObjectDetected(this.props.onFacesDetected)}
           onTextRecognized={this._onObjectDetected(this.props.onTextRecognized)}
           onPictureSaved={this._onPictureSaved}
+          onRecordingStarted={this._onRecordingStarted}
         >
           {this.renderChildren()}
         </RNCamera>

@@ -273,6 +273,14 @@ public class RNCameraViewHelper {
     reactContext.getNativeModule(UIManagerModule.class).getEventDispatcher().dispatchEvent(event);
   }
 
+  // Recording started event
+  
+  public static void emitRecordingStartedEvent(ViewGroup view, String path) {
+    RecordingStartedEvent event = RecordingStartedEvent.obtain(view.getId(), path);
+    ReactContext reactContext = (ReactContext) view.getContext();
+    reactContext.getNativeModule(UIManagerModule.class).getEventDispatcher().dispatchEvent(event);
+  }
+
   // Utilities
 
   public static int getCorrectCameraRotation(int rotation, int facing) {
