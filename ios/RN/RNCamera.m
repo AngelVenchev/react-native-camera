@@ -24,6 +24,7 @@
 @property (nonatomic, copy) RCTDirectEventBlock onTextRecognized;
 @property (nonatomic, copy) RCTDirectEventBlock onFacesDetected;
 @property (nonatomic, copy) RCTDirectEventBlock onPictureSaved;
+@property (nonatomic, copy) RCTDirectEventBlock onRecordingStarted;
 @property (nonatomic, assign) BOOL finishedReadingText;
 @property (nonatomic, copy) NSDate *start;
 
@@ -98,6 +99,13 @@ static NSDictionary *defaultFaceDetectorOptions = nil;
 {
     if (_onPictureSaved) {
         _onPictureSaved(event);
+    }
+}
+
+- (void)onRecordingStarted:(NSDictionary *)event
+{
+    if (_onRecordingStarted) {
+        _onRecordingStarted(event);
     }
 }
 
@@ -562,6 +570,8 @@ static NSDictionary *defaultFaceDetectorOptions = nil;
                 [connection setVideoMirrored:YES];
             }
         }
+
+        [self onRecordingStarted:@{@"uri": path}];
 
         NSURL *outputURL = [[NSURL alloc] initFileURLWithPath:path];
         [self.movieFileOutput startRecordingToOutputFileURL:outputURL recordingDelegate:self];

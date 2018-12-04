@@ -72,6 +72,7 @@
 - (void)onCodeRead:(NSDictionary *)event;
 - (void)onFacesDetected:(NSDictionary *)event;
 - (void)onPictureSaved:(NSDictionary *)event;
+- (void)onRecordingStarted:(NSDictionary *)event;
 - (void)onText:(NSDictionary *)event;
 
 @end
